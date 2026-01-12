@@ -1,0 +1,64 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: main
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/stevenjgibbons/XY2LATLON:
+      branch: main
+      repo: https://github.com/stevenjgibbons/XY2LATLON
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/stevenjgibbons/XY2LATLON git:
+        commands:
+        - /usr/bin/env sh .sqa/script.gummy-mauve-meerkat.sh
+        container: qc.acc_cozy-saffron-barb
+  QC.Doc:
+    repos:
+      github.com/stevenjgibbons/XY2LATLON find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.jumpy-lime-coati.sh
+        container: qc.doc_snoopy-pumpkin-zebu
+      github.com/stevenjgibbons/XY2LATLON git:
+        commands:
+        - /usr/bin/env sh .sqa/script.snazzy-bronze-dogfish.sh
+        container: qc.doc_bluesy-amaranth-ferret
+      github.com/stevenjgibbons/XY2LATLON markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.shaggy-sangria-hyena.sh
+        container: qc.doc_scaly-seashell-goose
+  QC.Lic:
+    repos:
+      github.com/stevenjgibbons/XY2LATLON licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.boozy-sangria-manatee.sh
+        container: qc.lic_flabby-wheat-bat
+  QC.Sec:
+    repos:
+      github.com/stevenjgibbons/XY2LATLON bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.cloudy-periwinkle-binturong.sh
+        container: qc.sec_slaphappy-amethyst-tang
+  QC.Sty:
+    repos:
+      github.com/stevenjgibbons/XY2LATLON flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.messy-carmine-bulldog.sh
+        container: qc.sty_frumpy-yellow-starfish
+  QC.Uni:
+    repos:
+      github.com/stevenjgibbons/XY2LATLON pytest:
+        commands:
+        - /usr/bin/env sh .sqa/script.trippy-apricot-kiwi.sh
+        container: qc.uni_hasty-wheat-binturong
+  QC.Ver:
+    repos:
+      github.com/stevenjgibbons/XY2LATLON get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.trippy-green-squirrel.sh
+        container: qc.ver_freaky-blue-lemur
+timeout: 5400
